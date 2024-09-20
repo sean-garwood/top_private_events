@@ -3,8 +3,8 @@ require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @creator = User.create!(name: "Test Creator")
-    @event = Event.create!(name: "Test Event", creator: @creator)
+    @creator = User.first
+    @event = Event.first
   end
 
   test "should get index" do
