@@ -1,0 +1,5 @@
+<h1>Created events</h1>
+<p>all the events you ever created.</p>
+<% @user.events.each do |event| %>
+  <p><%= link_to event.date, event_path(event) %></p>
+<% end %>
