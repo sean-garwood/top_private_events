@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @events = Event.all
   end
@@ -13,6 +14,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path, notice: "Event was successfully created."
     else
+      flash.error[:alert] = "Event was not created."
       render :new
     end
   end
@@ -24,6 +26,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:date)
+    params.require(:event).permit(:date, :id)
   end
 end
