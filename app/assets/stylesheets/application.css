@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+/* make everything have a grey background */
+body {
+    background-color: gray;
+}

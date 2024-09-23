@@ -7,3 +7,14 @@
   event date:
   <%= @event.date %>
 </div>
+<% if @event.attendees.include?(current_user) %>
+  <%= form_with model: [@event, @attendance],
+  url: event_attendance_path(@event, @attendance), method: :delete do |form| %>
+    <%= form.submit 'Cancel attendance' %>
+  <% end %>
+<% else %>
+  <%= form_with model: [@event, @attendance],
+  url: event_attendances_path(@event, @attendance), method: :post do |form| %>
+    <%= form.submit 'Attend' %>
+  <% end %>
+<% end %>
