@@ -7,3 +7,8 @@
   event date:
   <%= @event.date %>
 </div>
+<%= form_with url: event_attendance_path(@event), method: :post do %>
+  <%= check_box_tag 'attending', '1', false %>
+  <%= label_tag 'attending', 'Attending' %>
+  <%= submit_tag 'Submit' %>
+<% end %>
