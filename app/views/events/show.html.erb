@@ -25,6 +25,9 @@
   <% end %>
 <% end %>
 <% if @event.creator == current_user && @event.future? %>
-  <%# add an event edit button %>
   <p><%= link_to 'Edit event', edit_event_path %></p>
+  <%# add an event delete button %>
+  <%= form_with model: @event, url: event_path(@event), method: :delete do |form| %>
+    <%= form.submit 'Delete event' %>
+  <% end %>
 <% end %>

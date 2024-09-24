@@ -1,5 +1,8 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
+  # confirm creator actually wants to delete
+  before_action :authorize_creator, only: [ :destroy ]
+
   def index
     @events = Event.all
   end
@@ -46,6 +49,16 @@ class EventsController < ApplicationController
         flash[:alert] = "Event was not updated."
         render :edit
       end
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.future? && @event.creator == current_user
+      @event.destroy
+      redirect_to events_path, notice: "Event was successfully destroyed."
+    else
+      redirect_to events_path, alert: "Event was not destroyed."
     end
   end
 
