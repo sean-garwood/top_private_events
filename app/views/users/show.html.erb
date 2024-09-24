@@ -8,17 +8,14 @@
 <div>
   <h2>Past events</h2>
   <p>All the events you attended in the past.</p>
-  <% all_attended_events = @user.attended_events %>
-  <% past_events = all_attended_events.select { |e| e.date < Date.today } %>
-  <% future_events = all_attended_events.select { |e| e.date >= Date.today } %>
-  <% past_events.each do |event| %>
-    <p><%= link_to event.date, event_path(event) %></p>
+  <% @user.attended_events.past.each do |past_event| %>
+    <p><%= link_to past_event.date, event_path(past_event) %></p>
   <% end %>
 </div>
 <div>
   <h2>Upcoming events</h2>
   <p>All the events you will attend in the future.</p>
-  <% future_events.each do |event| %>
-    <p><%= link_to event.date, event_path(event) %></p>
+  <% @user.attended_events.future.each do |future_event| %>
+    <p><%= link_to future_event.date, event_path(future_event) %></p>
   <% end %>
 </div>

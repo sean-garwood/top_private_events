@@ -1,8 +1,9 @@
 <h1>Events</h1>
 <p>Where the action is</p>
-<% past_events = @events.select { |e| e.date < Date.today } %>
-<% future_events = @events.select { |e| e.date >= Date.today } %>
 <h2>Past events</h2>
+<%# get past events using Event.past %>
+<% past_events = Event.past.where("attended = ?", 1) %>
+<% future_events = Event.future.where("attended = ?", 0) %>
 <div>
   <% past_events.each do |event| %>
     <p><%= link_to event.date, event %></p>
