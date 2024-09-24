@@ -7,6 +7,12 @@
   event date:
   <%= @event.date %>
 </div>
+<div>
+  attendees:
+  <% @event.attendees.each do |attendee| %>
+    <%= attendee.email %>
+  <% end %>
+</div>
 <% if @event.attendees.include?(current_user) %>
   <%= form_with model: [@event, @attendance],
   url: event_attendance_path(@event, @attendance), method: :delete do |form| %>

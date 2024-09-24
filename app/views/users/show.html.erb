@@ -3,3 +3,10 @@
 <% @user.created_events.each do |event| %>
   <p><%= link_to event.date, event_path(event) %></p>
 <% end %>
+<div>
+  <h1>Attended events</h1>
+  <p>all the events you ever attended.</p>
+  <% @user.attended_events.each do |event| %>
+    <p><%= link_to event.date, event_path(event) %></p>
+  <% end %>
+</div>
