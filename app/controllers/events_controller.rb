@@ -65,6 +65,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.fetch(:event, {}).permit(:date, :id)
+    params.fetch(:event, {}).permit(:date, :location, :id)
   end
 end

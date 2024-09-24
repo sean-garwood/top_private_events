@@ -8,6 +8,10 @@
   <%= @event.date %>
 </div>
 <div>
+  event location:
+  <%= @event.location %>
+</div>
+<div>
   attendees:
   <% @event.attendees.each do |attendee| %>
     <%= attendee.email %>
