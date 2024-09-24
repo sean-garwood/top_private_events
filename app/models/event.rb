@@ -9,4 +9,12 @@ class Event < ApplicationRecord
 
   scope :past, -> { where("date < ?", Time.now) }
   scope :future, -> { where("date >= ?", Time.now) }
+
+  def past?
+    date < Time.now
+  end
+
+  def future?
+    date >= Time.now
+  end
 end

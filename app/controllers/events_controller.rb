@@ -25,9 +25,33 @@ class EventsController < ApplicationController
       @event.attendances.find_by(user: current_user) || Attendance.new
   end
 
+  # allow creator to update event
+  def edit
+    @event = current_user.created_events.find(params[:id])
+    if @event.nil?
+      flash.error[:alert] = "Event was not found."
+      redirect_to events_path
+    end
+  end
+
+  def update
+    @event = current_user.created_events.find(params[:id])
+    if @event.nil?
+      flash[:alert] = "Event was not found."
+      redirect_to events_path
+    else
+      if @event.update(event_params)
+        redirect_to event_path(@event), notice: "Event was successfully updated."
+      else
+        flash[:alert] = "Event was not updated."
+        render :edit
+      end
+    end
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:date, :id)
+    params.fetch(:event, {}).permit(:date, :id)
   end
 end
